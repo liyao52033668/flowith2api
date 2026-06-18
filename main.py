@@ -1,9 +1,10 @@
 import json
+import os
 import uuid
 import asyncio
 import bcrypt
-import uvicorn
 from datetime import datetime
+import uvicorn
 from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse, StreamingResponse
@@ -17,6 +18,9 @@ app = FastAPI(title="Flowith API", version="1.0.0")
 
 STATIC_DIR = Path(__file__).parent / "static"
 STATIC_DIR.mkdir(exist_ok=True)
+
+# 打印存储后端信息
+print(f"[main] Storage backend: {config.get_backend_info()['type']}")
 
 
 # ─── Auth helpers ──────────────────────────────────────────────

@@ -2,6 +2,7 @@ data/
 __pycache__/
 *.pyc
 *.pyo
+.venv/
 .env
 models_raw.json
 test_*.py

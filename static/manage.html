@@ -187,7 +187,10 @@
                     <div class="space-y-4 flex-1">
                         <div>
                             <label class="text-sm font-medium mb-2 block">API Key（用于客户端调用）</label>
-                            <input id="cfgApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                            <div class="flex gap-2">
+                                <input id="cfgApiKey" type="text" class="flex h-9 flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm">
+                                <button onclick="generateApiKey()" type="button" class="inline-flex items-center justify-center rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/90 h-9 px-3 text-sm whitespace-nowrap">随机生成</button>
+                            </div>
                             <p class="text-xs text-muted-foreground mt-1">客户端通过 Authorization: Bearer {api_key} 调用</p>
                         </div>
                     </div>
@@ -529,6 +532,15 @@
                 if (d.success) showToast('密码修改成功', 'success');
                 else showToast(d.detail || '修改失败');
             } catch (e) { showToast('修改失败'); }
+        }
+
+        function generateApiKey() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let key = 'sk-';
+            for (let i = 0; i < 29; i++) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('cfgApiKey').value = key;
         }
 
         async function saveApiConfig() {
